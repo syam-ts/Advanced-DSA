@@ -1,8 +1,14 @@
-class HeapDS {
+class Heap {
   constructor() {
     this.heap = [];
   };
   
+  buildHeap(array) {
+    this.heap = array.slice();
+    for(let i = Math.floor(this.heap.length / 2) - 1; i >= 0; i--) {
+         this.heapifyDown(i);
+    }
+  };
   addNode(value) {
     this.heap.push(value);
     this.heapifyUp(this.heap.length - 1);
@@ -10,9 +16,7 @@ class HeapDS {
 
 
   heapifyDown(index) {
-    let smallest = index;
-    let left = (index * 2) + 1;
-    let right = (index * 2) + 2;
+    let smallest = index, left = (index * 2) + 1, right = (index * 2) + 2;
     if (left < this.heap.length && this.heap[left] < this.heap[smallest]) {
       smallest = left;
     }
@@ -25,10 +29,7 @@ class HeapDS {
     }
   };
   
-
-
-  
-
+ 
   heapifyUp(index) {
     let parent = Math.floor((index - 1) / 2);
     if (index > 0 && this.heap[index] < this.heap[parent]) {
@@ -77,7 +78,21 @@ class HeapDS {
     }
     return sortedList;
   }
+
+  display() {
+    for (let i = 0; i < this.heap.length; i++) {
+       console.log(this.heap[i])
+    }
+  }
+
+  peek() {
+    return this.heap[0];
+  }
 }
 
-const h = new HeapDS();
+const h = new Heap();
 h.buildHeap([1, -2, 13, 7, -8, 9, 23]);
+h.deleteNode(1);
+h.deleteNode(7);
+h.deleteNode(13);
+h.display()
