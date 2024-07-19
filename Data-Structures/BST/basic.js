@@ -52,16 +52,22 @@ class BST{
 
 
 
-    isBalanced(root) {
+    isBalanced(root){
+      if (!root) {
+        return true; 
+      }
+      const leftHeight = this.height(root.left);
+      const rightHeight = this.height(root.right);
+      const heightDiff = Math.abs(leftHeight - rightHeight) <= 1;
+      return heightDiff && this.isBalanced(root.left) && this.isBalanced(root.right);
+    };
+    
+
+      height(root) {
         if (!root) {
-          return false;
+          return 0;
         }
-        let leftHeight = this.height(root.left);
-        let rightHeight = this.height(root.right);
-        let HeightDiff = Math.abs(leftHeight, rightHeight) <= 1;
-        return (
-          HeightDiff && this.isBalanced(root.left) && this.isBalanced(root.right)
-        );
+        return 1 + Math.max(this.height(root.left), this.height(root.right));
       }
       
       
@@ -110,3 +116,4 @@ console.log(bst.search(bst.root, 7));
 console.log(bst.search(bst.root, 32));
 console.log(bst.search(bst.root, 3));
 console.log(bst.search(bst.root, 9));
+console.log('Is this:', bst.isBalanced(bst.root))
