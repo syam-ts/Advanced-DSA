@@ -1,9 +1,4 @@
-// Import stylesheets
-import './style.css';
 
-// Write Javascript code!
-const appDiv = document.getElementById('app');
-appDiv.innerHTML = `<h1>JS Starter</h1>`;
 
 class Node {
   constructor(value) {
@@ -135,10 +130,10 @@ bst.insert(24);
 bst.insert(47);
 bst.insert(4);
 
-bst.delete(12);
-bst.delete(24);
-bst.delete(4);
-bst.delete(34);
+// bst.delete(12);
+// bst.delete(24);
+// bst.delete(4);
+// bst.delete(34);
 bst.inOrder(bst.root);
 
 
