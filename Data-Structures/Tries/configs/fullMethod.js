@@ -12,11 +12,6 @@ class Node {
   
   
   
-  
-  
-  
-  
-  
     insert(word) {
       let curr = this.root;
       for(let char of word) {

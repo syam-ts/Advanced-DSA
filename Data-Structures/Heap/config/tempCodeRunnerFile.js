@@ -1,1 +1,3 @@
- console.log(this.heap[i])
+
+h.deleteNode(1);
+h.deleteNode(7);

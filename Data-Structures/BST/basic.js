@@ -64,20 +64,20 @@ class BST{
       
       
       findTheClosestValue(root, target) {
-        let closest = root.value;
+        let closest = root.val;
         while (root !== null) {
-          if (Math.abs(target - closest) > Math.abs(target - root.value)) {
-            closest = root.value;
+          if (Math.abs(target - closest) > Math.abs(target - root.val)) {
+            closest = root.val;
           }
-          if (target < root.value) {
+          if (target < root.val) {
             root = root.left;
-          } else if (target > root.value) {
+          } else if (target > root.val) {
             root = root.right;
           } else {
             break;
           }
         }
-        return closest
+        return closest;
       }
 };
 
