@@ -52,17 +52,6 @@ class BST{
 
 
 
-    isBalanced(root){
-      if (!root) {
-        return true; 
-      }
-      const leftHeight = this.height(root.left);
-      const rightHeight = this.height(root.right);
-      const heightDiff = Math.abs(leftHeight - rightHeight) <= 1;
-      return heightDiff && this.isBalanced(root.left) && this.isBalanced(root.right);
-    };
-
-
       height(root) {
         if (!root) {
           return 0;
@@ -89,7 +78,7 @@ class BST{
           }
         }
         return closest
-      };
+      }
 };
 
 

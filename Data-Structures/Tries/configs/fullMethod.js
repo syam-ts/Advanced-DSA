@@ -1,79 +1,101 @@
-class TrieNode {
+class Node {
     constructor() {
-        this.children = {};
-        this.isEndOfWord = false;
+      this.children = {};
+      this.endWord = false;
     }
-}
-
-class Trie {
+  };
+  
+  class Trie {
     constructor() {
-        this.root = new TrieNode();
-    }
-
+      this.root = new Node();
+    };
+  
+  
+  
+  
+  
+  
+  
+  
     insert(word) {
-        let node = this.root;
-        for (let char of word) {
-            if (!node.children[char]) {
-                node.children[char] = new TrieNode();
-            }
-            node = node.children[char];
+      let curr = this.root;
+      for(let char of word) {
+        if(!curr.children[char]) {
+            curr.children[char] = new Node();
         }
-        node.isEndOfWord = true;
+        curr = curr.children[char];
+      }
+      curr.endWord = true;
     }
-
-    searchPrefix(prefix) {
-        let node = this.root;
-        for (let char of prefix) {
-            if (!node.children[char]) {
-                return null;
-            }
-            node = node.children[char];
-        }
-        return node;
+  
+    search(word) {
+      let curr = this.root;
+      for(let char of word) {
+         if(!curr.children[char]) {
+           return false;
+         }
+         curr = curr.children[char];
+      }
+      return (curr.endWord = true)
     }
-}
-
-class AutocompleteSystem {
-    constructor() {
-        this.trie = new Trie();
-    }
-
-    insert(word) {
-        this.trie.insert(word);
-    }
-
-    autocomplete(prefix) {
-        const result = [];
-        const node = this.trie.searchPrefix(prefix);
-
-        if (node) {
-            this.dfs(node, prefix, result);
-        }
-
-        return result;
-    }
-
-    dfs(node, prefix, result) {
-        if (node.isEndOfWord) {
-            result.push(prefix);
-        }
-        for (const char in node.children) {
-            this.dfs(node.children[char], prefix + char, result);
-        }
-    }
-    collection(node, word, list) {
+  
+    display() {
+      function traverse(node, prefix) {
         if (node.endWord) {
-          list.push(word);
+          console.log(prefix);
+        }
+        for (let char in node.children) traverse(node.children[char], prefix + char);
+      }
+      traverse(this.root, "");
+    };
+  
+     longestPrefix(word) {
+       let curr = this.root;
+       let prefix = "";
+       for(let char of word) {
+         if(!curr.children[char]) {
+           return prefix;
+         }
+         prefix += char;
+         curr = curr.children[char];
+         if(curr.endWord) {
+           prefix = word.substring(0, prefix.length);
+         }
+       }
+       return prefix
+     }
+  
+  
+    autoComplete(word) {
+      let currentNode = this.root;
+      let prefix = '';
+      for (let char of word) {
+        if (!currentNode.children[char]) {
+          return [];
+        }
+        prefix += char;
+        currentNode = currentNode.children[char];
+      }
+      let words = [];
+      function collectWords(node, prefix) {
+        if (node.endWord) {
+          words.push(prefix);
         }
         for (let char in node.children) {
-          this.collection(node.children[char], word + char, list);
+          collectWords(node.children[char], prefix + char);
         }
       }
-}
-
- 
-const autocompleteSystem = new AutocompleteSystem();
-autocompleteSystem.insert("dog");
-autocompleteSystem.insert("deer");
-autocompleteSystem.insert("deal");
-console.log(autocompleteSystem.autocomplete("de"));  
+      collectWords(currentNode, prefix);
+      return words;
+    }
+  }
+  
+  const t = new Trie();
+  t.insert('hai');
+  t.insert('hello');
+  t.insert('eai');
+  t.insert('hellothere');
+  
+  console.log(t.search('hello'))
+  
+  

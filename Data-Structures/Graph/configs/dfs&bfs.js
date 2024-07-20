@@ -21,10 +21,10 @@ display() {
         }
       });
     }
-
     return result;
   }
 
+  
   dfs(start) {
     const stack = [start];
     const result = [];

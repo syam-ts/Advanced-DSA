@@ -34,17 +34,7 @@ class Node {
     }
 
 
-
-    startsWith(word) {
-      let currentNode = this.root;
-      for (let char of word) {
-        if (!currentNode.children[char]) {
-          return false;
-        }
-        currentNode = currentNode.children[word];
-      }
-      return true;
-    };
+ 
 
 
     autoComplete(word) {
@@ -57,11 +47,15 @@ class Node {
       }
     };
 
+
+    
+
     display() {
         for (let i = 0; i < this.root.length; i++) {
            console.log(this.root.val)
         }
     };
+
 
     remove(word) {
       let curr = this.rootNode;
