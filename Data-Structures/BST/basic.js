@@ -61,7 +61,7 @@ class BST{
       const heightDiff = Math.abs(leftHeight - rightHeight) <= 1;
       return heightDiff && this.isBalanced(root.left) && this.isBalanced(root.right);
     };
-    
+
 
       height(root) {
         if (!root) {
@@ -71,19 +71,7 @@ class BST{
       }
       
       
-      isBST(root, min = null, max = null) {
-        if (!root) {
-          return true;
-        } else {
-          if (
-            (min != null && root.value <= min) ||
-            (max != null && root.value >= max)
-          ) {
-            return false;
-          }
-          return this.isBST(root.left, min, root.val) && this.isBST(root.right, min, root.val)
-        }
-      };
+      
       
       
       findTheClosestValue(root, target) {

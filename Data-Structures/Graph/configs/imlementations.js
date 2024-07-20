@@ -1,53 +1,53 @@
 class Graph {
     constructor() {
-        this.adjeacencyList = {};
+        this.adjacencyList = {};
     };
     
     
     addVertex(vertex) {
-        if(!this.adjeacencyList[vertex]) {
-            this.adjeacencyList[vertex] = new Set();
+        if(!this.adjacencyList[vertex]) {
+            this.adjacencyList[vertex] = new Set();
         }
     };
     
     addEdge(vertex1, vertex2) {
-        if(!this.adjeacencyList[vertex1]) {
+        if(!this.adjacencyList[vertex1]) {
             this.addVertex(vertex1);
         }  
-        if(!this.adjeacencyList[vertex2]) {
+        if(!this.adjacencyList[vertex2]) {
             this.addVertex(vertex2);
         }
-        this.adjeacencyList[vertex1].add(vertex2);
-        this.adjeacencyList[vertex2].add(vertex1);
+        this.adjacencyList[vertex1].add(vertex2);
+        this.adjacencyList[vertex2].add(vertex1);
     };
     
     
     display() {
-        for(let vertex in this.adjeacencyList) {
-            console.log(vertex + " -> " + [...this.adjeacencyList[vertex]])
+        for(let vertex in this.adjacencyList) {
+            console.log(vertex + " -> " + [...this.adjacencyList[vertex]])
         }
     };
     
     hasEdge(vertex1, vertex2) {
         return (
-             this.adjeacencyList[vertex1].has(vertex2) &&
-            this.adjeacencyList[vertex2].has(vertex1)
+             this.adjacencyList[vertex1].has(vertex2) &&
+            this.adjacencyList[vertex2].has(vertex1)
            )
     };
     
     removeEdge(vertex1, vertex2) {
-        this.adjeacencyList[vertex1].delete(vertex2) 
-        this.adjeacencyList[vertex2].delete(vertex1)
+        this.adjacencyList[vertex1].delete(vertex2) 
+        this.adjacencyList[vertex2].delete(vertex1)
     };
     
     removeVertex(vertex) {
-        if(!this.adjeacencyList[vertex]) {
+        if(!this.adjacencyList[vertex]) {
             return 
         } else {
-            for(let adVertex of this.adjeacencyList[vertex]) {
+            for(let adVertex of this.adjacencyList[vertex]) {
                 this.removeEdge(vertex, adVertex);
             }
-            delete this.adjeacencyList[vertex];
+            delete this.adjacencyList[vertex];
         }
     }
 };

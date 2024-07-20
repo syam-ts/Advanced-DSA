@@ -63,17 +63,26 @@ class Node {
         }
     };
 
+    remove(word) {
+      let curr = this.rootNode;
+      const branch = [curr];
     
-    collection(node, word, list) {
-      if (node.endWord) {
-        list.push(word);
+      for (let char of word) {
+        curr = curr.children[char];
+        branch.push(curr);
       }
-      for (let char in node.children) {
-        this.collection(node.children[char], word + char, list);
+    
+      curr.endWith = false;
+    
+      for (let i = branch.length - 2; i >= 0; i--) {
+        const j = i + 1;
+        if (!Object.keys(branch[j].children).length) {
+          delete branch[i].children[branch[j].val];
+        }
       }
+    
+      return null;
     }
-
-  
   };
 
   const trie = new Trie();

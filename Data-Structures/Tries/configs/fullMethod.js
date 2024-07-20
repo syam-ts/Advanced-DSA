@@ -61,6 +61,14 @@ class AutocompleteSystem {
             this.dfs(node.children[char], prefix + char, result);
         }
     }
+    collection(node, word, list) {
+        if (node.endWord) {
+          list.push(word);
+        }
+        for (let char in node.children) {
+          this.collection(node.children[char], word + char, list);
+        }
+      }
 }
 
  
