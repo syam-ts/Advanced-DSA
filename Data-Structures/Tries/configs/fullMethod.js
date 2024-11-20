@@ -10,8 +10,7 @@ class Node {
       this.root = new Node();
     };
   
-  
-  
+
     insert(word) {
       let curr = this.root;
       for(let char of word) {
@@ -39,11 +38,13 @@ class Node {
         if (node.endWord) {
           console.log(prefix);
         }
-        for (let char in node.children) traverse(node.children[char], prefix + char);
+        for (let char in node.children) 
+          traverse(node.children[char], prefix + char);
       }
       traverse(this.root, "");
     };
   
+    
      longestPrefix(word) {
        let curr = this.root;
        let prefix = "";

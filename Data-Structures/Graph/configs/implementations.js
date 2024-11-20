@@ -42,7 +42,7 @@ class Graph {
     
     removeVertex(vertex) {
         if(!this.adjacencyList[vertex]) {
-            return 
+            return false;
         } else {
             for(let adVertex of this.adjacencyList[vertex]) {
                 this.removeEdge(vertex, adVertex);

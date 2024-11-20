@@ -16,7 +16,7 @@ class binarySearchTree {
   insert(value) {
     const newNode = new Node(value);
     if(this.root === null) {
-      this.root = newNode;
+      this.root = newNode;  
     } else {
       this.insertNode(this.root , newNode);
     }
@@ -104,6 +104,7 @@ class binarySearchTree {
         return root;
       }
 
+       
     min(root) {
       if(!root.left) {
         return root.val;
@@ -119,6 +120,28 @@ class binarySearchTree {
         return this.max(root.right);
       }
     }
+     height = (root) => {
+      if(!root) {
+          return false;
+      }
+      let leftHeight = this.height(root.left);
+      let rightHeight = this.height(root.right);
+       return Math.max(leftHeight, rightHeight) + 1;
+  };
+  
+
+    isBST(root,min = null, max = null) {
+         
+      if (!root) {
+        return true;
+      } else {
+        if ((min != null && root.value <= min) || (max != null && root.value >= max)) {
+          return false;
+        } 
+        return this.isBST(root.left, min, root.val) && this.isBST(root.right, root.val, max)
+      }
+    }
+    
 };
 
 

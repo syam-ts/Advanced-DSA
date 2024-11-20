@@ -9,14 +9,18 @@ class Heap {
          this.heapifyDown(i);
     }
   };
+
+  
   addNode(value) {
     this.heap.push(value);
     this.heapifyUp(this.heap.length - 1);
   };
-
+  
 
   heapifyDown(index) {
-    let smallest = index, left = (index * 2) + 1, right = (index * 2) + 2;
+    let smallest = index;
+    let left = (index * 2) + 1;
+    let right = (index * 2) + 2;
     if (left < this.heap.length && this.heap[left] < this.heap[smallest]) {
       smallest = left;
     }
@@ -29,7 +33,10 @@ class Heap {
     }
   };
   
- 
+  swap(s, i) {
+    [this.heap[s] ,this.heap[i]] = [this.heap[i], this.heap[s]]
+};
+
   heapifyUp(index) {
     let parent = Math.floor((index - 1) / 2);
     if (index > 0 && this.heap[index] < this.heap[parent]) {
@@ -38,32 +45,19 @@ class Heap {
     }
   };
   
-
-  swap(i, j) {
-    [this.heap[i], this.heap[j]] = [this.heap[j], this.heap[i]];
-  };
   
 
-  remove() {
-    if (!this.heap || this.heap.length === 0) {
-      return null;
-    } else {
-      this.swap(0, this.heap.length - 1);
-      const temp = this.heap.pop();
-      this.heapifyDown(0);
-      return temp;
-    }
-  };
+ 
   
 
   deleteNode(data) {
     if (this.heap.includes(data)) {
-      const ind = this.heap.indexOf(data);
+      const index = this.heap.indexexOf(data);
       this.swap(this.heap.length - 1, ind);
       const deleted = this.heap.pop();
-      if (ind < this.heap.length) {
-        this.heapifyDown(ind);
-        this.heapifyUp(ind);
+      if (index < this.heap.length) {
+        this.heapifyDown(index);
+        this.heapifyUp(index);
       }
     } else {
       console.log('Element is not present in the heap');
@@ -73,10 +67,13 @@ class Heap {
 
   heapSort() {
     const sortedList = [];
-    while (this.heap.length > 0) {
-      sortedList.push(this.remove());
+    while (this.heap.length > 0) { 
+      this.swap(0, this.heap.length - 1); 
+      const temp = this.heap.pop(); 
+      this.heapifyDown(0); 
+      sortedList.push(temp);
     }
-    return sortedList;
+    return sortedList; 
   }
 
   display() {
@@ -89,10 +86,8 @@ class Heap {
     return this.heap[0];
   }
 }
+const arr = [4,3,6,23,53,24,7,86, 8,12,25];
 
 const h = new Heap();
-h.buildHeap([1, -2, 13, 7, -8, 9, 23]);
-h.deleteNode(1);
-h.deleteNode(7);
-h.deleteNode(13);
+h.buildHeap(arr);
 h.display()

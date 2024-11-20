@@ -48,19 +48,15 @@ class BST{
         }
     };
 
-    isBST(root) {
-        let [min , max] = [null, null];
-       
+    isBST(root,min = null, max = null) {
+         
         if (!root) {
           return true;
         } else {
-          if (
-            (min != null && root.value <= min) ||
-            (max != null && root.value >= max)
-          ) {
+          if ((min != null && root.value <= min) || (max != null && root.value >= max)) {
             return false;
           } 
-          return this.isBST(root.left, min, root.val) && this.isBST(root.right, min, root.val)
+          return this.isBST(root.left, min, root.val) && this.isBST(root.right, root.val, max)
         }
       }
      
