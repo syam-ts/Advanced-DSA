@@ -1,71 +1,52 @@
-class Heap {
-  heap : number[]
+class MinHeap {
+  heap: number[];
   constructor() {
-    this.heap = [];
-  };
-  
-  buildHeap(array: number[]) {
-    this.heap = array.slice();
-    for(let i = Math.floor(this.heap.length / 2) - 1; i >= 0; i--) {
-         this.heapifyDown(i);
-    }
-  };
+     this.heap = [];
+  }
 
-  
-  addNode(value) {
+  insert(value: number) {
     this.heap.push(value);
-    this.heapifyUp(this.heap.length - 1);
-  };
-  
+    this.heapifyUp(this.heap.length -1);
+  }
 
-  heapifyDown(index) {
-    let smallest = index;
-    let left = (index * 2) + 1;
-    let right = (index * 2) + 2;
-    if (left < this.heap.length && this.heap[left] < this.heap[smallest]) {
+  
+  swap(i: number, j: number) {
+    return [this.heap[i], this.heap[j]] = [ this.heap[j], this.heap[i]];
+  }
+
+  heapifyUp(index: number) {
+    let parent = Math.floor((index - 1)/ 2);
+    if(this.heap[index] < this.heap[parent] && index > 0) {
+      this.swap(parent, index);
+      this.heapifyUp(index);
+    }
+  }
+
+  heapifyDown(index: number) {
+    let smallest = index, left = index * 2 + 1, right = index * 2 + 2;
+    if(this.heap[left] < this.heap[smallest] && left < this.heap.length) {
       smallest = left;
-    }
-    if (right < this.heap.length && this.heap[right] < this.heap[smallest]) {
+    } 
+    if(this.heap[right] < this.heap[smallest] && right < this.heap.length) {
       smallest = right;
+    } 
+    if(smallest != index) {
+      this.swap(smallest, index)
+      this.heapifyDown(smallest)
     }
-    if (smallest !== index) {
-      this.swap(smallest, index);
-      this.heapifyDown(smallest);
-    }
-  };
-  
-  swap(s, i) {
-    [this.heap[s] ,this.heap[i]] = [this.heap[i], this.heap[s]]
-};
+  }
 
-  heapifyUp(index) {
-    let parent = Math.floor((index - 1) / 2);
-    if (index > 0 && this.heap[index] < this.heap[parent]) {
-      this.swap(index, parent);
-      this.heapifyUp(parent);
+  delete(value: number) {
+    const index = this.heap.indexOf(value);
+    if(index < -1) {
+      return;
     }
-  };
-  
-  
-
+    this.swap(index, this.heap.length -1);
+    this.heap.pop();
+    this.heapifyUp(index);
+    this.heapifyDown(index);
+  }
  
-  
-
-  deleteNode(data: number) {
-    if (this.heap.includes(data)) {
-      const index = this.heap.indexOf(data);
-      this.swap(this.heap.length - 1, index);
-      const deleted = this.heap.pop();
-      if (index < this.heap.length) {
-        this.heapifyDown(index);
-        this.heapifyUp(index);
-      }
-    } else {
-      console.log('Element is not present in the heap');
-    }
-  };
-  
-
   heapSort() {
     const sortedList: number[] = [];
     while (this.heap.length > 0) { 
@@ -77,18 +58,24 @@ class Heap {
     return sortedList; 
   }
 
-  display() {
-    for (let i = 0; i < this.heap.length; i++) {
-       console.log(this.heap[i])
-    }
-  }
-
   peek() {
-    return this.heap[0];
+    return this.heap[0]
   }
-}
-const arr = [4,3,6,23,53,24,7,86, 8,12,25];
 
-const h = new Heap();
-h.buildHeap(arr);
-h.display()
+  print() {
+    for(let x of this.heap) {
+      console.log(x)
+    } 
+ }
+ 
+};
+
+const heap = new MinHeap();
+heap.insert(34)
+heap.insert(104)
+heap.insert(3)
+heap.insert(4)
+heap.insert(65) 
+heap.print()
+console.log('The peek : ',heap.peek())
+console.log(heap.heapSort())
