@@ -1,9 +1,10 @@
 class Heap {
+  heap : number[]
   constructor() {
     this.heap = [];
   };
   
-  buildHeap(array) {
+  buildHeap(array: number[]) {
     this.heap = array.slice();
     for(let i = Math.floor(this.heap.length / 2) - 1; i >= 0; i--) {
          this.heapifyDown(i);
@@ -50,10 +51,10 @@ class Heap {
  
   
 
-  deleteNode(data) {
+  deleteNode(data: number) {
     if (this.heap.includes(data)) {
-      const index = this.heap.indexexOf(data);
-      this.swap(this.heap.length - 1, ind);
+      const index = this.heap.indexOf(data);
+      this.swap(this.heap.length - 1, index);
       const deleted = this.heap.pop();
       if (index < this.heap.length) {
         this.heapifyDown(index);
@@ -66,10 +67,10 @@ class Heap {
   
 
   heapSort() {
-    const sortedList = [];
+    const sortedList: number[] = [];
     while (this.heap.length > 0) { 
       this.swap(0, this.heap.length - 1); 
-      const temp = this.heap.pop(); 
+      const temp: any = this.heap.pop(); 
       this.heapifyDown(0); 
       sortedList.push(temp);
     }
