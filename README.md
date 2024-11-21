@@ -1,10 +1,10 @@
-<span>* Binary Search Tree</span>
-<span>* Graph </span>
-<span>* Heap </span>
-<span>* Trie </span>
-<span>* Bubble Sort </span>
-<span>* Insertion Sort </span>
-<span>* Selection Sort </span>
-<span>* Quick Sort </span>
-<span>* Merge Sort </span>
+<span>* Binary Search Tree</span> <br />
+<span>* Graph </span> <br />
+<span>* Heap </span> <br />
+<span>* Trie </span> <br />
+<span>* Bubble Sort </span> <br />
+<span>* Insertion Sort </span> <br />
+<span>* Selection Sort </span> <br />
+<span>* Quick Sort </span> <br />
+<span>* Merge Sort </span>  
  
