@@ -1,5 +1,3 @@
-// dfs , bfs in Graph
-
 type Vertex = any
 
 class Grpah {
