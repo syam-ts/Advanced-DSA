@@ -78,6 +78,6 @@ class Node {
   trie.insert('java');
   trie.insert('obj');
   trie.display()
-
+  console.log(trie.autoComplete('ja'))
  
  

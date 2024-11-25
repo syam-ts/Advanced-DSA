@@ -45,21 +45,21 @@ class Node {
     };
   
     
-     longestPrefix(word) {
-       let curr = this.root;
-       let prefix = "";
-       for(let char of word) {
-         if(!curr.children[char]) {
-           return prefix;
-         }
-         prefix += char;
-         curr = curr.children[char];
-         if(curr.endWord) {
-           prefix = word.substring(0, prefix.length);
-         }
-       }
-       return prefix
-     }
+    //  longestPrefix(word) {
+    //    let curr = this.root;
+    //    let prefix = "";
+    //    for(let char of word) {
+    //      if(!curr.children[char]) {
+    //        return prefix;
+    //      }
+    //      prefix += char;
+    //      curr = curr.children[char];
+    //      if(curr.endWord) {
+    //        prefix = word.substring(0, prefix.length);
+    //      }
+    //    }
+    //    return prefix
+    //  }
   
   
     autoComplete(word) {
@@ -84,6 +84,25 @@ class Node {
       collectWords(currentNode, prefix);
       return words;
     }
+
+    remove(word) {
+      let curr = this.root;
+      const branch = [curr];
+    
+      for (let char of word) {
+        curr = curr.children[char];
+        branch.push(curr);
+      }
+      curr.endWith = false;
+    
+      for (let i = branch.length - 2; i >= 0; i--) {
+        const j = i + 1;
+        if (!Object.keys(branch[j].children).length) {
+          delete branch[i].children[branch[j].val];
+        }
+      }
+      return null;
+    };
   }
   
   const t = new Trie();
@@ -92,6 +111,6 @@ class Node {
   t.insert('eai');
   t.insert('hellothere');
   
-  console.log(t.search('hello'))
+  console.log(t.remove('hai'))
   
   
