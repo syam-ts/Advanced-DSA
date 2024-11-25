@@ -7,4 +7,5 @@
 <span>* Selection Sort </span> <br />
 <span>* Quick Sort </span> <br />
 <span>* Merge Sort </span>  
+<span>* Heap Sort </span>  
  
