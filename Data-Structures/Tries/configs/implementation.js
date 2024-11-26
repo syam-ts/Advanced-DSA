@@ -1,3 +1,18 @@
+/**
+ *  ? Prefix Trie <---
+ * *  A prefix is any part of a word that comes at the beginning.
+ * * Inserting a word means inserting all of its prefixes.
+ * * For example, inserting the word "cat" will result in the prefixes: 
+ * !  "c", "ca", and "cat"  
+ * 
+ * ? Suffix Trie <----
+ * * A suffix is any part of the string that starts at any position and extends to the end.
+ * * Inserting a string means inserting all possible suffixes.
+ * * For example, for the string "banana", its suffixes are:
+ * !  "banana", "anana", "nana", "ana", "na", and "a".  
+ */ 
+
+// Trie implementation
 class Node {
     constructor() {
       this.children = {};
@@ -15,7 +30,7 @@ class Node {
       let curr = this.root;
       for(let char of word) {
         if(!curr.children[char]) {
-            curr.children[char] = new Node();
+          curr.children[char] = new Node();
         }
         curr = curr.children[char];
       }
@@ -33,16 +48,17 @@ class Node {
       return (curr.endWord = true)
     }
   
-    display() {
-      function traverse(node, prefix) {
-        if (node.endWord) {
-          console.log(prefix);
-        }
-        for (let char in node.children) 
-          traverse(node.children[char], prefix + char);
-      }
-      traverse(this.root, "");
-    };
+    // first method to display
+    // display() {
+    //   function traverse(node, prefix) {
+    //     if (node.endWord) {
+    //       console.log(prefix);
+    //     }
+    //     for (let char in node.children) 
+    //       traverse(node.children[char], prefix + char);
+    //   }
+    //   traverse(this.root, "");
+    // };
   
     
     //  longestPrefix(word) {
@@ -60,28 +76,34 @@ class Node {
     //    }
     //    return prefix
     //  }
+
+   // second method to display
+    display() {
+      console.log(JSON.stringify(this.root, null, 2));
+    }
   
   
-    autoComplete(word) {
-      let currentNode = this.root;
-      let prefix = '';
-      for (let char of word) {
-        if (!currentNode.children[char]) {
-          return [];
+    autoComplete(prefix) {
+      let node = this.root;
+   
+      for (let char of prefix) {
+        if (!node.children[char]) {
+          return [];  
         }
-        prefix += char;
-        currentNode = currentNode.children[char];
+        node = node.children[char];
       }
-      let words = [];
-      function collectWords(node, prefix) {
-        if (node.endWord) {
-          words.push(prefix);
+   
+      const words = [];
+      const dfs = (currentNode, currentWord) => {
+        if (currentNode.endWord) {
+          words.push(currentWord);
         }
-        for (let char in node.children) {
-          collectWords(node.children[char], prefix + char);
+        for (let char in currentNode.children) {
+          dfs(currentNode.children[char], currentWord + char);
         }
-      }
-      collectWords(currentNode, prefix);
+      };
+  
+      dfs(node, prefix);
       return words;
     }
 
@@ -110,7 +132,8 @@ class Node {
   t.insert('hello');
   t.insert('eai');
   t.insert('hellothere');
+  t.insert('eat');
+ 
+  console.log( t.autoComplete('h'))  
   
-  console.log(t.remove('hai'))
-  
-  
+ 
