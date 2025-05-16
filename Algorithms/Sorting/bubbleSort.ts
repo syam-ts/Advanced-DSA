@@ -12,3 +12,8 @@ const bubbleSort = (arr: number[]): number[] => {
 };
 
 console.log("Result: ", bubbleSort(arr));
+
+
+/* using nested loops comparing
+ i'th element with all the j'th element 
+ and swap accordingly */
