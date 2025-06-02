@@ -13,7 +13,7 @@ class HashTable {
     return hash % this.buckets.length;
   }
 
-  //set value on particular index
+  //set value on particular index 
   set(key: string, value: string | number) {
     const index: number = this.hash(key);
     const bucket = this.buckets[index];
@@ -52,3 +52,6 @@ hashTable.set('domain', 'web development');
 hashTable.set('mane', 'not your type');
 
 console.log('Retrieve Value : ', hashTable.get('place'));
+
+
+//collision handled using chaining by array
