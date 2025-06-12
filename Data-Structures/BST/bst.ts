@@ -167,7 +167,7 @@ class BST implements BST {
   }
 }
 
-const bst = new BST();
+var bst = new BST();
 
 bst.insert(34);
 bst.insert(12);
