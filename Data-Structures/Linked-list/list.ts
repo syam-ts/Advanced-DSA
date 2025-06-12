@@ -117,9 +117,9 @@ const linkedlist = new Linkedlist();
 linkedlist.insertBegining('carrot')
 linkedlist.insertBegining('banana')
 linkedlist.insertBegining('apple')
-linkedlist.insertLast('dopamin')
+linkedlist.insertLast('dolphin')
 linkedlist.insertLast('mango')
-linkedlist.insertBegining('latest')
+linkedlist.insertBegining('first')
 linkedlist.insertMiddle('middle-one')
 
 console.log('linkedlist: ', linkedlist.print())
